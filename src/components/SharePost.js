@@ -27,9 +27,9 @@ function SharePost({ userId }) {
 
   const handlePost = async () => {
     const formData = new FormData();
-    formData.append("userId", _id);
-    formData.append("description", post);
     if (image) {
+      formData.append("userId", _id);
+      formData.append("description", post);
       formData.append("picture", image);
       formData.append("picturePath", image.name);
     }
@@ -43,15 +43,14 @@ function SharePost({ userId }) {
           body: formData,
         }
       );
-
+      response.img = response.formData.fileUrl;
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const posts = await response.json();
       dispatch(setPosts({ posts }));
-      setImage(null);
-      setPost("");
+      window.location.reload();
     } catch (error) {
       console.error("Failed to fetch:", error);
     }
@@ -138,7 +137,7 @@ function SharePost({ userId }) {
         {isOpen && (
           <div
             className="lg:hidden absolute rounded-lg top-[45px] z-10 right-[40%] 
-  w-[50%] bg-grey-100 dark:bg-grey-700 p-2"
+  w-[50%] bg-grey-100 dark:bg-grey-700 p-2 gap-3"
           >
             <div className="flex gap-1 items-center cursor-pointer">
               <GifBoxOutlinedIcon />

@@ -74,7 +74,7 @@ function Navbar({userId}) {
         </div>
       )}
       {isOpen && !noMobScreen && (
-        <div className="absolute top-12 right-0 min-h-[calc(100%-48px)] w-[50%] bg-grey-100 dark:bg-grey-700 p-2 z-10">
+        <div className="absolute top-12 right-0  w-[50%] bg-grey-100 dark:bg-grey-700 p-2 z-10">
           <div className="flex flex-col gap-5 items-center">
             <button
               onClick={() => dispatch(setMode())}

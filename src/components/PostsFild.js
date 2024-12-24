@@ -14,8 +14,17 @@ function PostsFild({ userId, isProfile = false }) {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    dispatch(setPosts({ posts: data }));
+    if (data) {
+      dispatch(
+        setPosts({
+          posts: data.sort((p1, p2) => {
+            return new Date(p2.createdAt) - new Date(p1.createdAt);
+          }),
+        })
+      );
+    }
   };
+
   const getUserPosts = async () => {
     const response = await fetch(
       `https://social-server-tau.vercel.app/posts/${userId}`,
@@ -25,7 +34,15 @@ function PostsFild({ userId, isProfile = false }) {
       }
     );
     const data = await response.json();
-    dispatch(setPosts({ posts: data }));
+    if (data) {
+      dispatch(
+        setPosts({
+          posts: data.sort((p1, p2) => {
+            return new Date(p2.createdAt) - new Date(p1.createdAt);
+          }),
+        })
+      );
+    }
   };
 
   useEffect(() => {

@@ -29,17 +29,14 @@ function Post({
   const likeCount = Object.keys(likes).length;
 
   const patchLike = async () => {
-    const response = await fetch(
-      `https://social-server-tau.vercel.app/posts/${postId}/like`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: loggedInUserId }),
-      }
-    );
+    const response = await fetch(`https://social-server-tau.vercel.app/posts/${postId}/like`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: loggedInUserId }),
+    });
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
   };
@@ -64,15 +61,9 @@ function Post({
         <div className="flex items-center gap-2">
           <button onClick={patchLike} className="flex items-center gap-2">
             {isLiked ? (
-              <FavoriteOutlined
-                className="text-red-500 cursor-pointer"
-                onClick={patchLike}
-              />
+              <FavoriteOutlined className="text-red-500 cursor-pointer" />
             ) : (
-              <FavoriteBorderOutlined
-                className="text-red-500 cursor-pointer"
-                onClick={patchLike}
-              />
+              <FavoriteBorderOutlined className="text-red-500 cursor-pointer" />
             )}
             <span>{likeCount}</span>
           </button>

@@ -27,11 +27,11 @@ function SharePost({ userId }) {
 
   const handlePost = async () => {
     const formData = new FormData();
+    formData.append("userId", _id);
+    formData.append("description", post);
     if (image) {
-      formData.append("userId", _id);
-      formData.append("description", post);
       formData.append("picture", image);
-      formData.append("picturePath", image.name);
+    
     }
 
     try {
@@ -50,7 +50,7 @@ function SharePost({ userId }) {
 
       const posts = await response.json();
       dispatch(setPosts({ posts }));
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("Failed to fetch:", error);
     }

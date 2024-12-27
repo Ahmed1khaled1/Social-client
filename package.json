@@ -49,5 +49,6 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
-  }
+  },
+  "proxy": "https://social-server-tau.vercel.app"
 }

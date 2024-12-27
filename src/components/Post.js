@@ -29,16 +29,28 @@ function Post({
   const likeCount = Object.keys(likes).length;
 
   const patchLike = async () => {
-    const response = await fetch(`https://social-server-tau.vercel.app/posts/${postId}/like`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: loggedInUserId }),
-    });
-    const updatedPost = await response.json();
-    dispatch(setPost({ post: updatedPost }));
+    try {
+      const response = await fetch(
+        `https://social-server-tau.vercel.app/posts/${postId}/like`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: loggedInUserId }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const updatedPost = await response.json();
+      dispatch(setPost({ post: updatedPost }));
+    } catch (error) {
+      console.error("Failed to patch like:", error);
+    }
   };
 
   return (
@@ -53,7 +65,7 @@ function Post({
       {picturePath && (
         <img
           className="my-5"
-          src={`https://social-server-tau.vercel.app/assets/${picturePath}`}
+          src={picturePath}
           alt="post"
         />
       )}

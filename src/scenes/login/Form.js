@@ -121,8 +121,8 @@ const login = async (values, onSubmitProps) => {
                 onChange={handleChange}
                 value={values.firstName}
                 name="firstName"
-                error={Boolean(touched.firstName) && Boolean(errors.firstName)}
-                helperText={touched.firstName && errors.firstName}
+                autoComplete="given-name"
+                error={Boolean(touched.firstName) && Boolean(errors.firstName) ? true : undefined}
                 className="col-span-4 md:col-span-2 cursor-pointer p-2 rounded-md dark:bg-grey-800 border border-grey-300"
               />
               <input
@@ -132,8 +132,8 @@ const login = async (values, onSubmitProps) => {
                 onChange={handleChange}
                 value={values.lastName}
                 name="lastName"
-                error={Boolean(touched.lastName) && Boolean(errors.lastName)}
-                helperText={touched.lastName && errors.lastName}
+                autoComplete="family-name"
+                error={Boolean(touched.lastName) && Boolean(errors.lastName) ? true : undefined}
                 className="col-span-4 md:col-span-2 p-2 cursor-pointer rounded-md dark:bg-grey-800 border border-grey-300"
               />
               <input
@@ -143,8 +143,8 @@ const login = async (values, onSubmitProps) => {
                 onChange={handleChange}
                 value={values.location}
                 name="location"
-                error={Boolean(touched.location) && Boolean(errors.location)}
-                helperText={touched.location && errors.location}
+                autoComplete="address-level2"
+                error={Boolean(touched.location) && Boolean(errors.location) ? true : undefined}
                 className="col-span-4 p-2 rounded-md cursor-pointer dark:bg-grey-800 border border-grey-300"
               />
               <input
@@ -154,10 +154,10 @@ const login = async (values, onSubmitProps) => {
                 onChange={handleChange}
                 value={values.occupation}
                 name="occupation"
+                autoComplete="organization-title"
                 error={
-                  Boolean(touched.occupation) && Boolean(errors.occupation)
+                  Boolean(touched.occupation) && Boolean(errors.occupation) ? true : undefined
                 }
-                helperText={touched.occupation && errors.occupation}
                 className="col-span-4 p-2 rounded-md cursor-pointer dark:bg-grey-800 border border-grey-300"
               />
               <Dropzone
@@ -193,8 +193,8 @@ const login = async (values, onSubmitProps) => {
             onChange={handleChange}
             value={values.email}
             name="email"
-            error={Boolean(touched.email) && Boolean(errors.email)}
-            helperText={touched.email && errors.email}
+            autoComplete="email"
+            error={Boolean(touched.email) && Boolean(errors.email) ? true : undefined}
             className="col-span-4 p-2 rounded-md cursor-pointer dark:bg-grey-800 border border-grey-300"
           />
           <input
@@ -205,8 +205,8 @@ const login = async (values, onSubmitProps) => {
             onChange={handleChange}
             value={values.password}
             name="password"
-            error={Boolean(touched.password) && Boolean(errors.password)}
-            helperText={touched.password && errors.password}
+            autoComplete="current-password"
+            error={Boolean(touched.password) && Boolean(errors.password) ? true : undefined}
             className="col-span-4 p-2 rounded-md cursor-pointer dark:bg-grey-800 border border-grey-300"
           />
           <button

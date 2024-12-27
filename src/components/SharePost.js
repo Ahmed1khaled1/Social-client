@@ -50,7 +50,7 @@ function SharePost({ userId }) {
 
       const posts = await response.json();
       dispatch(setPosts({ posts }));
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.error("Failed to fetch:", error);
     }

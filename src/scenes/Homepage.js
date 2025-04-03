@@ -32,15 +32,15 @@ function Homepage() {
   return (
     <div>
       <Navbar />
-      <div className="lg:flex block px-[6%] py-5 w-[100%] gap-6">
-        <div className="lg:basis-1/4">
+      <div className="md:flex block py-5 max-w-[90%] gap-6 mx-auto">
+        <div className="lg:w-1/4 md:w-1/3 mb-5">
           <UserWidget userId={_id} picturePath={picturePath} />
         </div>
-        <div className="lg:basis-2/5 mt-10 lg:mt-0">
+        <div className="lg:w-2/4 md:w-2/3 lg:mt-0">
           <SharePost picturePath={picturePath} />
           <PostsFild userId={_id} />
         </div>
-        <div className="hidden lg:block lg:basis-1/4">
+        <div className="hidden lg:block lg:w-1/4">
           <Add />
           <FrindsList userId={_id} />
         </div>

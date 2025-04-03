@@ -31,7 +31,6 @@ function SharePost({ userId }) {
     formData.append("description", post);
     if (image) {
       formData.append("picture", image);
-    
     }
 
     try {
@@ -50,7 +49,7 @@ function SharePost({ userId }) {
 
       const posts = await response.json();
       dispatch(setPosts({ posts }));
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.error("Failed to fetch:", error);
     }
@@ -59,7 +58,7 @@ function SharePost({ userId }) {
   return (
     <div className="dark:bg-grey-800 bg-white p-3 rounded-xl text-left">
       <div className="flex justify-between items-center">
-        <div onClick={() => navigate(`/profile/${userId}`)}>
+        <div >
           <UserImg image={picturePath} />
         </div>
         <input

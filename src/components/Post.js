@@ -25,6 +25,7 @@ function Post({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
+  
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
 
@@ -41,11 +42,9 @@ function Post({
           body: JSON.stringify({ userId: loggedInUserId }),
         }
       );
-
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
       const updatedPost = await response.json();
       dispatch(setPost({ post: updatedPost }));
     } catch (error) {

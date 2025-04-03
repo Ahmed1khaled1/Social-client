@@ -23,7 +23,7 @@ function Navbar({userId}) {
   const [isOpen, setIsOen] = useState(false);
 
   return (
-    <div className="flex justify-between items-center bg-grey-0 dark:bg-grey-800 px-[6%] py-2">
+    <div className="flex justify-between items-center bg-grey-0 dark:bg-grey-800 px-[6%] py-2 sticky  top-0 z-50">
       <div className="flex justify-between items-center">
         <div
           className="text-2xl font-bold mr-5 text-primary-500 cursor-pointer"
@@ -59,11 +59,9 @@ function Navbar({userId}) {
             onClick={() => dispatch(setLogout())}
           />
           <div className="font-semibold text-xl">{fullName}</div>
-          
         </div>
       ) : (
         <div className="flex gap-5">
-          
           <button
             value={isOpen}
             onClick={() => setIsOen(!isOpen)}
@@ -80,7 +78,6 @@ function Navbar({userId}) {
               onClick={() => dispatch(setMode())}
               className="cursor-pointer"
             >
-              
               {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
             </button>
             <MessageIcon className="cursor-pointer" />

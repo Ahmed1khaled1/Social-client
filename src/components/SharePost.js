@@ -32,7 +32,6 @@ function SharePost({ userId }) {
     if (image) {
       formData.append("picture", image);
     }
-
     try {
       const response = await fetch(
         `https://social-server-tau.vercel.app/posts`,
@@ -42,11 +41,9 @@ function SharePost({ userId }) {
           body: formData,
         }
       );
-      response.img = response.formData.fileUrl;
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
       const posts = await response.json();
       dispatch(setPosts({ posts }));
       window.location.reload();
@@ -54,11 +51,14 @@ function SharePost({ userId }) {
       console.error("Failed to fetch:", error);
     }
   };
-
   return (
     <div className="dark:bg-grey-800 bg-white p-3 rounded-xl text-left">
       <div className="flex justify-between items-center">
+<<<<<<< HEAD
         <div >
+=======
+        <div>
+>>>>>>> 64744f3d65d30abb608851c56634bd3d3342194e
           <UserImg image={picturePath} />
         </div>
         <input

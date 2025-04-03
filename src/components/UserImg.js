@@ -5,7 +5,7 @@ const UserImg = ({ image }) => {
     <img
       src={image}
       alt="User"
-      className="w-10 h-10 rounded-full object-cover"
+      className="min-w-10 h-10 rounded-full object-cover"
     />
   );
 };

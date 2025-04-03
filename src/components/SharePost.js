@@ -51,8 +51,8 @@ function SharePost({ userId }) {
   };
   return (
     <div className="dark:bg-grey-800 bg-white p-3 rounded-xl text-left">
-      <div className="flex justify-between items-center">
-        <div>
+      <div className="flex flex-col justify-between items-center w-full">
+        <div className="flex w-full">
           <UserImg image={picturePath} />
           <input
             value={post}
@@ -69,11 +69,10 @@ function SharePost({ userId }) {
         >
           {({ getRootProps, getInputProps }) => (
             <div
-              className="col-span-4 p-2 mt-3 rounded-md cursor-pointer 
+              className="p-2 mt-3 w-full rounded-md cursor-pointer 
             dark:bg-grey-800 border border-grey-300"
               {...getRootProps()}
             >
-              <div>
                 <input {...getInputProps()} />
                 {!image ? (
                   <p className="text-grey-300">Add image Here</p>
@@ -83,7 +82,7 @@ function SharePost({ userId }) {
                     <EditOutlinedIcon />
                   </div>
                 )}
-              </div>
+              
             </div>
           )}
         </Dropzone>
@@ -97,7 +96,7 @@ function SharePost({ userId }) {
           </div>
         )}
         <hr className="m-3" />
-        <div className="relative flex justify-between items-center">
+        <div className="relative w-full flex justify-between items-center">
           <div
             onClick={() => setIsImage(!isImage)}
             className="flex gap-1 items-center cursor-pointer"

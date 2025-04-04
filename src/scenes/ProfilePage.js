@@ -26,25 +26,27 @@ function ProfilePage() {
   };
 
   useEffect(() => {
-    getUser();
+      getUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  if (!user) return null;
+
+    if (!user) return null;
 
   return (
-    <div>
+    <div className="w-full">
       <Navbar />
-      <div className="px-5">
-
-      <div className="max-w-4xl mx-auto mt-5">
-        {user && <UserWidget userId={userId} picturePath={user.picturePath} />}
-        <FrindsList userId={userId} />
-      </div>
-      <div className="lg:flex block justify-center py-5 w-[100%] gap-6">
-        <div className="lg:basis-2/5 mt-10 lg:mt-0">
+      <div className="md:flex block justify-center py-5 max-w-[90%] mx-auto gap-6">
+        <div className="lg:w-1/4 md:w-1/3">
+          {user && (
+            <UserWidget userId={userId} picturePath={user.picturePath} />
+          )}
+          <div className="mb-5">
+            <FrindsList userId={userId} />
+          </div>
+        </div>
+        <div className="lg:w-2/4 md:w-2/3 lg:mt-0">
           <SharePost picturePath={user.picturePath} />
           <PostsFild userId={userId} isProfile />
         </div>
-      </div>
       </div>
     </div>
   );

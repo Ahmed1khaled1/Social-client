@@ -148,7 +148,7 @@ function SharePost({ userId }) {
           <button
             disabled={!post}
             onClick={handlePost}
-            className="dark:bg-grey-600 bg-grey-50 py-1 px-4 rounded-lg dark:text-white text-grey-800 font-medium"
+            className="dark:bg-grey-600 bg-grey-50 py-1 px-4 rounded-lg dark:text-white text-grey-800 font-medium cursor-pointer"
           >
             Post
           </button>

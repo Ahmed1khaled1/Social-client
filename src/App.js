@@ -12,7 +12,9 @@ function App() {
   return (
     <div className={mode === "dark" ? "dark" : ""}>
       <div className="bg-grey-10 dark:bg-grey-900 min-h-screen text-grey-900 dark:text-grey-0">
-        <BrowserRouter>
+        <BrowserRouter
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route

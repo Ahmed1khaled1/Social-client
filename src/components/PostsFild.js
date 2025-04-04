@@ -5,23 +5,30 @@ import { setPosts } from "state";
 
 function PostsFild({ userId, isProfile = false }) {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts) || [];
   const token = useSelector((state) => state.token);
 
   const getPosts = async () => {
-    const response = await fetch("https://social-server-tau.vercel.app/posts", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await response.json();
-    if (data) {
-      dispatch(
-        setPosts({
-          posts: data.sort((p1, p2) => {
-            return new Date(p2.createdAt) - new Date(p1.createdAt);
-          }),
-        })
+    try {
+      const response = await fetch(
+        "https://social-server-tau.vercel.app/posts",
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
+      const data = await response.json();
+      if (data) {
+        dispatch(
+          setPosts({
+            posts: data.sort((p1, p2) => {
+              return new Date(p2.createdAt) - new Date(p1.createdAt);
+            }),
+          })
+        );
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -51,7 +58,7 @@ function PostsFild({ userId, isProfile = false }) {
     } else {
       getPosts();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isProfile, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>

@@ -13,8 +13,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UserImg from "./UserImg";
 import { setPosts } from "state";
+import axios from "axios";
 
-function SharePost({ userId }) {
+function SharePost() {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
   const [image, setImage] = useState(null);
@@ -24,31 +25,45 @@ function SharePost({ userId }) {
   const token = useSelector((state) => state.token);
 
   const handlePost = async () => {
+    if (!image && !post.trim()) {
+      alert("You need to add text or an image to post!");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("userId", _id);
-    formData.append("description", post);
+    
     if (image) {
       formData.append("picture", image);
     }
+
+    if (post.trim()) {
+      // Only include if there's text
+      formData.append("description", post);
+    }
+    console.log("Image:", image);
+
     try {
-      const response = await fetch(
+      const response = await axios.post(
         `https://social-server-tau.vercel.app/posts`,
+        formData,
         {
-          method: "POST",
-          headers: { Authorization: `Bearer ${token}` },
-          body: formData,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const posts = await response.json();
-      dispatch(setPosts({ posts }));
       window.location.reload();
+      console.log("Post successful:", response.data);
+      dispatch(setPosts(response.data ));
+      setPost(""); // Reset text input
+      setImage(null); // Reset image input
     } catch (error) {
-      console.error("Failed to fetch:", error);
+      console.error("Error posting:", error);
     }
   };
+
   return (
     <div className="dark:bg-grey-800 bg-white p-3 rounded-xl text-left">
       <div className="flex flex-col justify-between items-center w-full">
@@ -73,16 +88,15 @@ function SharePost({ userId }) {
             dark:bg-grey-800 border border-grey-300"
               {...getRootProps()}
             >
-                <input {...getInputProps()} />
-                {!image ? (
-                  <p className="text-grey-300">Add image Here</p>
-                ) : (
-                  <div className="flex justify-between items-center">
-                    {image.name}
-                    <EditOutlinedIcon />
-                  </div>
-                )}
-              
+              <input {...getInputProps()} />
+              {!image ? (
+                <p className="text-grey-300">Add image Here</p>
+              ) : (
+                <div className="flex justify-between items-center">
+                  {image.name}
+                  <EditOutlinedIcon />
+                </div>
+              )}
             </div>
           )}
         </Dropzone>
@@ -146,7 +160,7 @@ function SharePost({ userId }) {
           )}
 
           <button
-            disabled={!post}
+            disabled={!post && !image}
             onClick={handlePost}
             className="dark:bg-grey-600 bg-grey-50 py-1 px-4 rounded-lg dark:text-white text-grey-800 font-medium cursor-pointer"
           >
